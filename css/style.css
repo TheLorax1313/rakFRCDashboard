@@ -53,12 +53,7 @@ fieldset label.displayValue {
     width: 15vw;
     padding: 10px; 
 }
-select {
-    border: none;
-    background: none;
-    color: white;
-    height: 25px;
-}
+
 
 input[type="text"], input[type="number"] {
     cursor: text;
@@ -109,6 +104,7 @@ header {
     background-color: #333;
     /* You'll need to mess with this a bit to get your camera to work. Replace the url with a live-updating image feed from your camera. Using other camera streaming systems will require some tweaking. */
     background-image: url('http://10.9.57.7:1189/stream.mjpg');
+    background-size: contain;
 }
 
 #tuning {

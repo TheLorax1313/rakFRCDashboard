@@ -166,28 +166,43 @@ NetworkTables.addKeyListener('/SmartDashboard/autoChoices/options', (key, value)
         ui.autoSelect.appendChild(option);
     }
     // Set value to the already-selected mode. If there is none, nothing will happen.
-    ui.autoSelect.value = NetworkTables.getValue('/SmartDashboard/currentlySelectedMode');
+    ui.autoSelect.value = NetworkTables.getValue('/SmartDashboard/autoChoices/selected');
 });
 
 // Load list of prewritten controller options
 NetworkTables.addKeyListener('/SmartDashboard/controllerChooser/options', (key, value) => {
     // Clear previous list
-    while (ui.autoSelect.firstChild) {
-        ui.autoSelect.removeChild(ui.autoSelect.firstChild);
+    while (ui.controllerChooser.firstChild) {
+        ui.controllerChooser.removeChild(ui.controllerChooser.firstChild);
     }
     // Make an option for each autonomous mode and put it in the selector
     for (let i = 0; i < value.length; i++) {
         var option = document.createElement('option');
         option.appendChild(document.createTextNode(value[i]));
-        ui.autoSelect.appendChild(option);
+        ui.controllerChooser.appendChild(option);
     }
     // Set value to the already-selected mode. If there is none, nothing will happen.
-    ui.autoSelect.value = NetworkTables.getValue('/SmartDashboard/currentlySelectedController');
+    ui.controllerChooser.value = NetworkTables.getValue('/SmartDashboard/controllerChooser/selected');
 });
 
 // Load list of prewritten autonomous modes
 NetworkTables.addKeyListener('/SmartDashboard/autoChoices/selected', (key, value) => {
     ui.autoSelect.value = value;
+});
+
+// Load list of prewritten autonomous modes
+NetworkTables.addKeyListener('/SmartDashboard/lidStatus', (key, value) => {
+    ui.lidStatus.innerHTML = value;
+});
+
+// Load list of prewritten autonomous modes
+NetworkTables.addKeyListener('/SmartDashboard/driveMode', (key, value) => {
+    ui.driveMode.innerHTML = value;
+});
+
+// Load list of prewritten autonomous modes
+NetworkTables.addKeyListener('/SmartDashboard/autoAim', (key, value) => {
+    ui.autoAim.innerHTML = value;
 });
 
 // Global Listener
@@ -271,7 +286,7 @@ ui.gyro.container.onclick = function () {
     // Store previous gyro val, will now be subtracted from val for callibration
     ui.gyro.offset = ui.gyro.val;
     // Trigger the gyro to recalculate value.
-    updateGyro('/SmartDashboard/gyroValue', ui.gyro.val);
+	NetworkTables.setValue('/SmartDashboard/gyroReset', true);
 };
 // Open tuning section when button is clicked
 ui.tuning.button.onclick = function () {
