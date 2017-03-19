@@ -9,31 +9,50 @@
 }
 
 body {
-    font: 16px sans-serif;
+    font: 4vh bold;
+    font-family: Tahoma, Verdana, Arial; 
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
-    color: white;
+    color: yellow;
     overflow: hidden;
-    background: #222;
+    background: black;
 }
 
 button, input[type="text"], input[type="number"], .select-container, select {
-    color: white;
+    color: yellow;
     background: #444;
     border: none;
-    font-size: 14px;
+    font-size: 4vh;
     padding: 6px 8px;
     cursor: pointer;
     outline: 0;
 }
 
 .select-container {
-    padding: 0;
+    padding: 10;
     display: inline-block;
 }
 
+fieldset
+{
+    font-size: 6vh;
+    border: none;
+    padding: 3px;
+}
+label.textLabel {
+    display: inline-block;
+    width: 15vw;
+    text-align: right;
+}
+fieldset label.displayValue {
+    display: inline-block;
+    color: black;
+    font-weight: bold;
+    width: 15vw;
+    padding: 10px; 
+}
 select {
     border: none;
     background: none;
@@ -57,14 +76,14 @@ body > * {
     padding: 10px;
     position: fixed;
     overflow: scroll;
-    background: #222;
+    background: black;
 }
 
 #timer {
     font-family: monospace;
     display: block;
-    height: 20vh;
-    width: 30vw;
+    height: 18vh;
+    width: 20vw;
     top: 0;
     left: 0;
     font-size: 20vh;
@@ -75,7 +94,7 @@ header {
     width: 20vw;
     height: 20vh;
     top: 0;
-    left: 30vw;
+    left: 20vw;
     color: white;
 }
 
@@ -89,7 +108,7 @@ header {
     overflow: hidden;
     background-color: #333;
     /* You'll need to mess with this a bit to get your camera to work. Replace the url with a live-updating image feed from your camera. Using other camera streaming systems will require some tweaking. */
-    /*background-image: url('LINK TO CAMERA SOURCE HERE');*/
+    background-image: url('http://10.9.57.7:1189/stream.mjpg');
 }
 
 #tuning {
@@ -109,7 +128,7 @@ header {
 
 article {
     top: 0;
-    left: 50vw;
+    left: 40vw;
     height: 100vh;
     width: 35vw;
 }
@@ -124,17 +143,17 @@ svg * {
 }
 
 text {
-    font-size: 16px;
+    font-size: 4vh;
     letter-spacing: 2px;
     stroke: none;
     fill: white;
 }
 
 #gyro {
-    width: 175px;
+    width: 20vw;
     height: 175px;
-    margin-left: 30px;
-    margin-top: 15px;
+    margin-left: 0px;
+    margin-top: 0px;
 }
 
 #gyro-arm {
@@ -145,6 +164,7 @@ text {
 
 #gyro-number {
     font-size: 25px;
+    color: yellow;
     text-anchor: middle;
 }
 
@@ -161,14 +181,14 @@ text {
 }
 
 #team {
-    font-size: 28px;
+    font-size: 6vh;
     letter-spacing: -1px;
 }
 
 aside {
     right: 0;
     top: 0;
-    width: 15vw;
+    width: 20vw;
     height: 100vh;
 }
 
@@ -198,7 +218,7 @@ body.login-close > .greybox {
 #login {
     display: block;
     margin: 14em auto 0 auto;
-    width: 18em;
+    width: 20em;
     overflow: hidden;
     animation: 1s linear;
     padding: 4px;
