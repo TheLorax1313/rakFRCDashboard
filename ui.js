@@ -103,15 +103,6 @@ let updateGyro = (key, value) => {
 };
 NetworkTables.addKeyListener('/SmartDashboard/gyroValue', updateGyro);
 
-// This button is just an example of triggering an event on the robot by clicking a button.
-NetworkTables.addKeyListener('/SmartDashboard/gyroReset', (key, value) => {
-    // Sometimes, NetworkTables will pass booleans as strings. This corrects for that.
-    if (typeof value === 'string')
-        value = value === "true";
-    // Set class active if value is true and unset it if it is false
-    ui.example.button.classList.toggle('active', value);
-});
-
 NetworkTables.addKeyListener('/SmartDashboard/time_running', (key, value) => {
     // Sometimes, NetworkTables will pass booleans as strings. This corrects for that.
     if (typeof value === 'string')
@@ -279,15 +270,19 @@ function onValueChanged(key, value, isNew) {
 // The rest of the doc is listeners for UI elements being clicked on
 ui.resetGyro.button.onclick = function () {
     // Set NetworkTables values to the opposite of whether button has active class.
-	NetworkTables.setValue('/SmartDashboard/gyroReset', true);
+    alert("Reset Gyro Button clicked.");
+    NetworkTables.putValue('/SmartDashboard/gyroReset', true);
 };
+
 // Reset gyro value to 0 on click
 ui.gyro.container.onclick = function () {
     // Store previous gyro val, will now be subtracted from val for callibration
     ui.gyro.offset = ui.gyro.val;
+    alert("Gyro container clicked.");
     // Trigger the gyro to recalculate value.
-	NetworkTables.setValue('/SmartDashboard/gyroReset', true);
+	NetworkTables.putValue('/SmartDashboard/gyroReset', true);
 };
+
 // Open tuning section when button is clicked
 ui.tuning.button.onclick = function () {
     if (ui.tuning.list.style.display === 'none') {
@@ -297,6 +292,7 @@ ui.tuning.button.onclick = function () {
         ui.tuning.list.style.display = 'none';
     }
 };
+
 // Manages get and set buttons at the top of the tuning pane
 ui.tuning.set.onclick = function () {
     // Make sure the inputs have content, if they do update the NT value
@@ -304,14 +300,19 @@ ui.tuning.set.onclick = function () {
         NetworkTables.putValue('/SmartDashboard/' + ui.tuning.name.value, ui.tuning.value.value);
     }
 };
+
 ui.tuning.get.onclick = function () {
     ui.tuning.value.value = NetworkTables.getValue(ui.tuning.name.value);
 };
+
 // Update NetworkTables when autonomous selector is changed
 ui.autoSelect.onchange = function () {
+	alert("pushing '" + this.value + "' to /SmartDashboard/autoChoices")
     NetworkTables.putValue('/SmartDashboard/autoChoices/selected', this.value);
 };
+
 // Get value of arm height slider when it's adjusted
 ui.controllerChooser.onchange = function() {
-	NetworkTables.setValue('/SmartDashboard/controllerChooser/selected', this.value);
+	alert("pushing '" + this.value + "' to /SmartDashboard/controllerChooser")
+	NetworkTables.putValue('/SmartDashboard/controllerChooser/selected', this.value);
 }
